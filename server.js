@@ -14,6 +14,9 @@ async function init() {
       client.query(
         "SELECT * FROM comments NATURAL LEFT JOIN rich_content WHERE board_id = $1",
         [req.query.search]
+        // NEVER THIS:
+        // `SELECT * FROM comments NATURAL LEFT JOIN rich_content WHERE board_id =
+        // $[req.query.search]`
       ),
       client.query("SELECT * FROM boards WHERE board_id = $1", [
         req.query.search,
